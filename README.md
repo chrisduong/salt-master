@@ -10,7 +10,12 @@ Default LOG_LEVEL is "error", you can change to "info" for more verbose
 
 ## Creating shared volume for Salt Master
 ``
-docker run --name salt_conf_data -v `pwd`/salt-conf:/etc/salt/master.d -v `pwd`/salt-srv:/srv/salt  busybox true
+docker run --name salt_conf_data \
+    -v `\pwd\`/salt-conf:/etc/salt/master.d \
+    -v \`pwd\`/salt-srv:/srv/salt  \
+    -v \`pwd\`/salt-pki:/etc/salt/pki \
+    -v \`pwd\`/salt-pillar:/srv/pillar \
+    busybox true
 ``
 
 ## Start Salt Master to pickup shared volume
@@ -19,7 +24,3 @@ docker run -d --name  saltmaster1 --volumes-from salt_conf_data   chrisduong/sal
 ``
 # Notes
 At the moment, -M option does not work as expected as we installed from git.
-
-
-
-
